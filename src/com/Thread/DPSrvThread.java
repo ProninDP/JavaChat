@@ -2,7 +2,11 @@ package com.Thread;
 
 import com.Server.DPSrv;
 import com.Util.ReceivedNL;
-
+/**
+ * Класс получения данных пользователей по UDP,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class DPSrvThread implements Runnable{
   DPSrv dpSrv = new DPSrv();
   String name;

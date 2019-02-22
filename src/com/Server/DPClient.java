@@ -9,7 +9,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
-
+/**
+ * Класс оправки UDP данных о локальном клиент-сервере в сеть,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class DPClient {
   private static int srvPort = 9997;
   private static DatagramSocket ds;

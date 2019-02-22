@@ -3,7 +3,11 @@ package com.Thread;
 import com.Server.DPClient;
 import com.Util.NameList;
 import com.Util.Status;
-
+/**
+ * Класс потока отправки данных пользователя по UDP,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class DPClientThread implements Runnable{
   private DPClient dpClient = new DPClient();
   public Thread t;

@@ -13,6 +13,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+/**
+ * Класс главной формы чата,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 
 public class MainForm extends JFrame {
   private static final String APPLICATION_NAME = "JavaChat";

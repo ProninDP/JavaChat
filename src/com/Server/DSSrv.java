@@ -4,7 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
 import com.Util.*;
-
+/**
+ * Класс прием-отправки сообщений,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 
 
 public class DSSrv {

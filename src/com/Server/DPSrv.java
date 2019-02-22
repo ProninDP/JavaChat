@@ -4,7 +4,11 @@ import com.Util.*;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
-
+/**
+ * Класс приема UDP данных о клиент-серверах из сети,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class DPSrv{
   private static int srvPort = 9997;
   private static DatagramSocket ds;

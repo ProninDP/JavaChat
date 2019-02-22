@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-
+/**
+ * Класс формы оправки-чтения сообщений,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class ChatForm extends JFrame{
   private JPanel rootPanel;
   private JTabbedPane tabbedPane1;

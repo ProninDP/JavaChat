@@ -2,7 +2,11 @@ package com.Util;
 
 import java.net.InetAddress;
 import java.util.*;
-
+/**
+ * Класс данных принятых от других клиент-серверов,
+ * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @version 0.1
+ */
 public class ReceivedNL {
   public Hashtable htable = new Hashtable();
 

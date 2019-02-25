@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /**
  * Класс истории переписки,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class Story {

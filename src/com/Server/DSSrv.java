@@ -6,7 +6,7 @@ import java.util.Enumeration;
 import com.Util.*;
 /**
  * Класс прием-отправки сообщений,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 
@@ -16,7 +16,7 @@ public class DSSrv {
   private static ServerSocket server; // серверсокет
   private static BufferedReader in; // поток чтения из сокета
   private static BufferedWriter out; // поток записи в сокет
-  ReceivedNL receivedNL;
+  private ReceivedNL receivedNL;
   private static final int PORT = 9996;
   public static Story story; // история общей переписки
   private static InetAddress ipaddr;
@@ -59,7 +59,7 @@ public class DSSrv {
 
   public void DSCping() throws IOException { //"пингуем" юзеров по списку
     try {
-      Enumeration en = receivedNL.htable.keys();
+      Enumeration en = receivedNL.hmap.keys();
       while (en.hasMoreElements()) {
         InetAddress addr = (InetAddress) en.nextElement();
         //получаем значение по ключу, и рассматриваем его как объект типа InetAddress

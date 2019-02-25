@@ -8,7 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 /**
  * Класс формы оправки-чтения сообщений,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class ChatForm extends JFrame{
@@ -47,11 +47,11 @@ public class ChatForm extends JFrame{
     this.getContentPane().add(rootPanel);
     //tabbedPane1.addTab(name, new TabbPane());
   }
-  public void addtab(ArrayList name){
-    tabbedPane1.addTab((String) name.get(0), jpanel);
-    nameField.setText((String) name.get(0));
-    nameADField.setText((String) name.get(1));
-    statField.setText((String)name.get(2));
+  public void addtab(ArrayList<String> name){
+    tabbedPane1.addTab(name.get(0), jpanel);
+    nameField.setText(name.get(1));
+    nameADField.setText(name.get(0));
+    statField.setText(name.get(2));
     buttCloseTab.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {

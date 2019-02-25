@@ -1,21 +1,18 @@
 package com.Form;
 
-import com.Main;
-import com.Server.DPClient;
-import com.Thread.DPClientThread;
 import com.Util.*;
 
+import javax.lang.model.util.Elements;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.InetAddress;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 /**
  * Класс главной формы чата,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 
@@ -26,7 +23,7 @@ public class MainForm extends JFrame {
   private JPanel panel1;
   private JPanel panel2;
   private JList list1;
-  private JComboBox statBox;
+  private JComboBox<String> statBox;
   private JToolBar toolB;
   private JButton buttRef;
   private JButton buttInf;
@@ -46,7 +43,7 @@ public class MainForm extends JFrame {
   public MainForm(ReceivedNL receivedNL, Status status) {
     this.getContentPane().add(rootPanel);
     //Отобразить список
-    list1.setListData(receivedNL.htable.values().toArray());
+    list1.setListData(receivedNL.hmap.values().toArray());
     //Окно чата
     ChatForm cf = new ChatForm();
     cf.setDefaultCloseOperation(ChatForm.HIDE_ON_CLOSE);
@@ -60,8 +57,8 @@ public class MainForm extends JFrame {
           cf.restoreWindow();
           int idx = list1.getSelectedIndex();
           if (idx != -1){
-            cf.addtab((ArrayList) list1.getSelectedValue());
-            cf.setTitle("Chat with " + list1.getSelectedValue().toString());
+            cf.addtab((ArrayList<String>) list1.getSelectedValue());
+            cf.setTitle("Chat with " + list1.getSelectedValue());
           }
         }
       }
@@ -76,19 +73,21 @@ public class MainForm extends JFrame {
       }
     });
     //обновить список
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-      @Override
-      public void run() {
-        list1.setListData(receivedNL.htable.values().toArray());
-      }
-    }, 0, 1000);
-    buttRef.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        list1.setListData(receivedNL.htable.values().toArray());
-      }
-    });
+    synchronized (receivedNL) {
+      Timer timer = new Timer();
+      timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          list1.setListData(receivedNL.hmap.values().toArray());
+        }
+      }, 10, 1000);
+      buttRef.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          list1.setListData(receivedNL.hmap.values().toArray());
+        }
+      });
+    }
     //Статус в комбобокс
     statBox.addItem("Доступен");
     statBox.addItem("Занят");

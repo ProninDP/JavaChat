@@ -11,12 +11,10 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 /**
  * Класс оправки UDP данных о локальном клиент-сервере в сеть,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class DPClient {
-  private static int srvPort = 9997;
-  private static DatagramSocket ds;
 
   private byte[] writeToByteArray(ArrayList<String> list) { //преобразуем массив спсисков в байт массив
     byte[] data = new byte[list.size()];
@@ -30,17 +28,12 @@ public class DPClient {
     return data;
   }
 
-  public void dpClient(NameList nameList, String status) throws Exception { //отправляем имя клиента в бродкаст сеть
-    ds = new DatagramSocket(9998);
-
-    byte[] data = writeToByteArray(nameList.nl(status));
-
-    try {
-      ds.send(new DatagramPacket(data, data.length, InetAddress.getByName("255.255.255.255"), srvPort));
+  public void dpClient(NameList nameList, String status) { //отправляем имя клиента в бродкаст сеть
+    try (DatagramSocket ds = new DatagramSocket(9998)) {
+      byte[] data = writeToByteArray(nameList.nl(status));
+      ds.send(new DatagramPacket(data, data.length, InetAddress.getByName("255.255.255.255"), 9997));
     } catch (IOException e) {
       e.printStackTrace();
-    } finally {
-      ds.close();
     }
   }
 }

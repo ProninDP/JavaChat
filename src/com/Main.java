@@ -11,7 +11,7 @@ import javax.swing.*;
 /**
  * Класс создания обьектов(Список пользователей, Локальные данные, Главная Форма чата),
  * запуска главных потоков(UDP Прием сообщений, UDP Отправка сообщений, TCP Сервер).
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class Main {
@@ -29,8 +29,5 @@ public class Main {
       mf.setTitle("JavaChat");
       mf.setVisible(true);
     });
-    //Проверка запуска потоков
-    System.out.println("ЗапущенDPSRV: " + dpSrvThread.t.isAlive());
-    System.out.println("ЗапущенDPCLIENT: " + dpClientThread.t.isAlive());
   }
 }

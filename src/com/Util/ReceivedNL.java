@@ -2,15 +2,17 @@ package com.Util;
 
 import java.net.InetAddress;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * Класс данных принятых от других клиент-серверов,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class ReceivedNL {
-  public Hashtable htable = new Hashtable();
+  public ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
 
-  public void entrySet(InetAddress ipadr, ArrayList<String> name) {
+  public synchronized void entrySet(InetAddress ipadr, ArrayList<String> name) {
     //Тест!!!
     /*String s = name.get(2);
     String st = "";
@@ -33,18 +35,18 @@ public class ReceivedNL {
     }
      */
     //Тест завершон!!!
-    htable.put(ipadr, name);
+    hmap.put(ipadr, name);
   }
-  public void delSet(InetAddress ipadr) {
-      htable.remove(ipadr);
+  public synchronized void delSet(InetAddress ipadr) {
+    hmap.remove(ipadr);
   }
 
 
-  public void print(){ //проверить что список создается и наполняется
-    Enumeration en = htable.keys();
+  public synchronized void print(){ //проверить что список создается и наполняется
+    Enumeration en = hmap.keys();
     while (en.hasMoreElements()) {
       InetAddress key = (InetAddress) en.nextElement();
-      ArrayList<String> value = (ArrayList<String>) htable.get(key);
+      ArrayList<String> value = hmap.get(key);
       System.out.println(key + " <-> " + value);
     }
   }

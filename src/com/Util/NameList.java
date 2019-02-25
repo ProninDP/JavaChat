@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * Класс локальных данных о клиент-сервере,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class NameList {

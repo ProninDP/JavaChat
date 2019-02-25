@@ -4,20 +4,19 @@ import com.Server.DPSrv;
 import com.Util.ReceivedNL;
 /**
  * Класс получения данных пользователей по UDP,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class DPSrvThread implements Runnable{
-  DPSrv dpSrv = new DPSrv();
-  String name;
-  public Thread t;
-  ReceivedNL receivedNL;
+  private DPSrv dpSrv = new DPSrv();
+  private Thread t;
+  private ReceivedNL receivedNL;
   public DPSrvThread(String threadname, ReceivedNL receivedNL){
-    name = threadname;
     this.receivedNL = receivedNL;
-    t = new Thread(this, name);
+    t = new Thread(this, threadname);
     System.out.println("Новый поток: " + t);
     t.start();
+    System.out.println("ЗапущенDPSRV: " + t.isAlive());
   }
   @Override
   public void run() {

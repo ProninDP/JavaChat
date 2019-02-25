@@ -1,7 +1,7 @@
 package com.Util;
 /**
  * Класс статуса,
- * @autor Пронин Дмитрий Павлович slidernode@yandex.ru
+ * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */
 public class Status {

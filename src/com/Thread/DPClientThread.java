@@ -10,7 +10,7 @@ import com.Util.Status;
  */
 public class DPClientThread implements Runnable{
   private DPClient dpClient = new DPClient();
-  public Thread t;
+  private Thread t;
   private NameList nameList;
   private Status status;
 
@@ -21,6 +21,7 @@ public class DPClientThread implements Runnable{
     t = new Thread(this, threadname);
     System.out.println("Новый поток: " + t);
     t.start();
+    System.out.println("ЗапущенDPCLIENT: " + t.isAlive());
   }
 
   @Override

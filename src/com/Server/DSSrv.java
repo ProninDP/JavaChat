@@ -12,27 +12,22 @@ import com.Util.*;
 
 
 public class DSSrv {
-  //private static Socket socket; //сокет для общения
-  private static ServerSocket server; // серверсокет
   private static BufferedReader in; // поток чтения из сокета
   private static BufferedWriter out; // поток записи в сокет
-  private ReceivedNL receivedNL;
   private static final int PORT = 9996;
-  public static Story story; // история общей переписки
-  private static InetAddress ipaddr;
 
 
   public void DSServer() throws IOException { //принимаем данные
-    String ping;
+    String msg;
     try (ServerSocket server = new ServerSocket(PORT)){
       while (true) {
         Socket socket = server.accept();
         in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         //TODO: Добавить новое соединение в список сокетов
 
-        ping = in.readLine();
+        msg = in.readLine();
 
-        if (ping.equals("ping")) {
+        if (msg.equals("ping")) {
           System.out.println("Don't worry, this is ping");
         }
       }
@@ -57,7 +52,7 @@ public class DSSrv {
     }
   }
 
-  public void DSCping() throws IOException { //"пингуем" юзеров по списку
+  public void DSCping(ReceivedNL receivedNL) { //"пингуем" юзеров по списку
     try {
       Enumeration en = receivedNL.hmap.keys();
       while (en.hasMoreElements()) {
@@ -68,10 +63,11 @@ public class DSSrv {
           out.write("ping" + "\n");
           out.flush();
         } catch (SocketException e){
+          System.out.println("Сокет клиента не отвечает, удаляем из списка!");
           receivedNL.delSet(addr); //получатель не доступен, удаляем из списка
-        } finally {
-          out.close();
-        }
+        } //finally {
+          //out.close();
+        //}
       }
     } catch (IOException e){
       e.printStackTrace();

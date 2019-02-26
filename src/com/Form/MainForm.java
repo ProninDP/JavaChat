@@ -80,7 +80,7 @@ public class MainForm extends JFrame {
         public void run() {
           list1.setListData(receivedNL.hmap.values().toArray());
         }
-      }, 10, 1000);
+      },0, 1000);
       buttRef.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {

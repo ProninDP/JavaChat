@@ -13,28 +13,6 @@ public class ReceivedNL {
   public ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
 
   public synchronized void entrySet(InetAddress ipadr, ArrayList<String> name) {
-    //Тест!!!
-    /*String s = name.get(2);
-    String st = "";
-    System.out.println(s);
-    Enumeration en = htable.keys();
-    while (en.hasMoreElements()) {
-      InetAddress key = (InetAddress) en.nextElement();
-      ArrayList<String> value = (ArrayList<String>) htable.get(key);
-      st=value.get(2);
-      System.out.println(st);
-    }
-    if (!s.equals(st)) {
-      //htable.remove(ipadr);
-      htable.put(ipadr, name);
-    }
-    /*
-    if (s.equals(st) && !htable.containsKey(ipadr)) {
-      htable.remove(ipadr);
-      htable.put(ipadr, name);
-    }
-     */
-    //Тест завершон!!!
     hmap.put(ipadr, name);
   }
   public synchronized void delSet(InetAddress ipadr) {

@@ -3,7 +3,7 @@ package com.Thread;
 import com.Server.DSSrv;
 import com.Util.ReceivedNL;
 /**
- * Класс отправки сообщений ping,
+ * Класс тест отправки сообщений ping,
  * @author Пронин Дмитрий Павлович slidernode@yandex.ru
  * @version 0.1
  */

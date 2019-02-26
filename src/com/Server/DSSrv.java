@@ -52,7 +52,7 @@ public class DSSrv {
 
   public void DSCping(ReceivedNL receivedNL) { //"пингуем" юзеров по списку
     try {
-      Enumeration en = receivedNL.hmap.keys();
+      Enumeration en = receivedNL.getHmap().keys();
       while (en.hasMoreElements()) {
         InetAddress addr = (InetAddress) en.nextElement();
         //получаем значение по ключу, и рассматриваем его как объект типа InetAddress

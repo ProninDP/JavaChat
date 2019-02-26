@@ -43,7 +43,7 @@ public class MainForm extends JFrame {
   public MainForm(ReceivedNL receivedNL, Status status) {
     this.getContentPane().add(rootPanel);
     //Отобразить список
-    list1.setListData(receivedNL.hmap.values().toArray());
+    list1.setListData(receivedNL.getHmap().values().toArray());
     //Окно чата
     ChatForm cf = new ChatForm();
     cf.setDefaultCloseOperation(ChatForm.HIDE_ON_CLOSE);
@@ -78,13 +78,13 @@ public class MainForm extends JFrame {
       timer.schedule(new TimerTask() {
         @Override
         public void run() {
-          list1.setListData(receivedNL.hmap.values().toArray());
+          list1.setListData(receivedNL.getHmap().values().toArray());
         }
       },0, 1000);
       buttRef.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-          list1.setListData(receivedNL.hmap.values().toArray());
+          list1.setListData(receivedNL.getHmap().values().toArray());
         }
       });
     }

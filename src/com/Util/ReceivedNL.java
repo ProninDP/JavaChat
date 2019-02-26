@@ -10,7 +10,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 0.1
  */
 public class ReceivedNL {
-  public ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
+  private ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
+
+  public ConcurrentHashMap<InetAddress, ArrayList<String>> getHmap() {
+    return hmap;
+  }
 
   public synchronized void entrySet(InetAddress ipadr, ArrayList<String> name) {
     hmap.put(ipadr, name);

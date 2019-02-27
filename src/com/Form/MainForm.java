@@ -18,7 +18,7 @@ import java.util.TimerTask;
 
 public class MainForm extends JFrame {
   private static final String APPLICATION_NAME = "JavaChat";
-  private static final String ICON_STR = "/com/res/mainform/ic_question_answer_black_18dp.png";
+  private static final String ICON_STR = "/com/res/mainform/Icons_36.png";
   private JPanel rootPanel;
   private JPanel panel1;
   private JPanel panel2;
@@ -41,6 +41,9 @@ public class MainForm extends JFrame {
   }
 
   public MainForm(ReceivedNL receivedNL, Status status) {
+    URL imageURL = MainForm.class.getResource(ICON_STR);
+    Image image = Toolkit.getDefaultToolkit().getImage(imageURL);
+    setIconImage(image);
     this.getContentPane().add(rootPanel);
     //Отобразить список
     list1.setListData(receivedNL.getHmap().values().toArray());

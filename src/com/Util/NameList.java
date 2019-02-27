@@ -20,8 +20,12 @@ public class NameList {
   public ArrayList<String> nl(String status) {
     ArrayList<String> list = new ArrayList<>();
     list.add(name);
-    for (String s : listf)
-      list.add(s.substring(0, s.indexOf(".")));
+    if(listf.length!=0) {
+      for (String s : listf)
+        list.add(s.substring(0, s.indexOf(".")));
+    }else {
+      list.add("NoFullName");
+    }
     list.add(status);
     return list;
   }

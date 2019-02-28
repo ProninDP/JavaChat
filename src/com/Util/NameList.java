@@ -1,6 +1,7 @@
 package com.Util;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,12 @@ public class NameList {
   public NameList() {
     name = System.getProperty("user.name");
     listf = new File("C:\\Users\\" + name + "\\Contacts")
-            .list((dir, namelink) -> namelink.endsWith(".contact"));
+            .list(new FilenameFilter() {
+              @Override
+              public boolean accept(File dir, String namelink) {
+                return namelink.endsWith(".contact");
+              }
+            });
   }
   public ArrayList<String> nl(String status) {
     ArrayList<String> list = new ArrayList<>();

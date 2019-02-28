@@ -1,6 +1,9 @@
 package com.Form;
 
+import com.Util.Smile;
+
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -41,9 +44,10 @@ public class ChatForm extends JFrame{
   private JPanel jpanel;
   private JTextPane textPaneIn;
   private JTextPane textPaneOut;
+  private Smile smile;
 
-  public ChatForm(){
-
+  public ChatForm(Smile smile){
+    this.smile = smile;
     this.getContentPane().add(rootPanel);
     //tabbedPane1.addTab(name, new TabbPane());
   }
@@ -61,6 +65,29 @@ public class ChatForm extends JFrame{
         } if (select==0){
           setVisible(false);
         }
+      }
+    });
+    buttSmile.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        JFrame smilefram = new JFrame();
+        smilefram.setUndecorated(true);
+        smilefram.setVisible(true);
+        smilefram.setSize(250, 300);
+        JPanel contents = new JPanel();
+        contents.setBorder(new EmptyBorder(5, 5, 5, 5));
+        JButton exit = new JButton("Exit");
+        JList<String> jList = new JList<>(smile.getSmileName());
+        exit.setSize(200, 200);
+        contents.add(new JScrollPane(jList));
+        contents.add(exit);
+        smilefram.setContentPane(contents);
+        exit.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            smilefram.dispose();
+          }
+        });
       }
     });
   }

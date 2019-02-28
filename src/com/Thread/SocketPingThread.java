@@ -1,6 +1,6 @@
 package com.Thread;
 
-import com.Server.DSSrv;
+import com.Server.SocketSrv;
 import com.Util.ReceivedNL;
 /**
  * Класс тест отправки сообщений ping,
@@ -8,23 +8,23 @@ import com.Util.ReceivedNL;
  * @version 0.1
  */
 
-public class DSCpingThread implements Runnable{
-  private DSSrv dsSrv = new DSSrv();
+public class SocketPingThread implements Runnable{
+  private SocketSrv socketSrv = new SocketSrv();
   private ReceivedNL receivedNL;
 
-  public DSCpingThread(String threadname, ReceivedNL receivedNL) {
+  public SocketPingThread(String threadname, ReceivedNL receivedNL) {
     this.receivedNL = receivedNL;
     Thread t = new Thread(this, threadname);
     System.out.println("Новый поток: " + t);
     t.start();
-    System.out.println("Запущен DSSrv.DSCping: " + t.isAlive());
+    System.out.println("Запущен SocketSrv.SocketPing: " + t.isAlive());
   }
 
   @Override
   public void run() {
     try {
       while (true) {
-        dsSrv.DSCping(receivedNL);
+        socketSrv.SocketPing(receivedNL);
         Thread.sleep(15000);
       }
     } catch (Exception e) {

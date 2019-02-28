@@ -3,9 +3,10 @@ package com;
 import com.Form.MainForm;
 import com.Thread.DPClientThread;
 import com.Thread.DPSrvThread;
-import com.Thread.DSCpingThread;
+import com.Thread.SocketPingThread;
 import com.Util.NameList;
 import com.Util.ReceivedNL;
+import com.Util.Smile;
 import com.Util.Status;
 
 import javax.swing.*;
@@ -23,10 +24,10 @@ public class Main {
     Status status = new Status("Доступен"); //Статус клиента
     DPSrvThread dpSrvThread = new DPSrvThread("DPSRV", receivedNL);
     DPClientThread dpClientThread = new DPClientThread("DPCLIENT", nameList, status);
-
-    DSCpingThread dsCpingThread = new DSCpingThread("DSSrv.DSCping", receivedNL);
+    Smile smile = new Smile();
+    SocketPingThread socketPingThread = new SocketPingThread("SocketPingSrv", receivedNL);
     SwingUtilities.invokeLater(() -> {
-      MainForm mf = new MainForm(receivedNL, status);
+      MainForm mf = new MainForm(receivedNL, status, smile);
       mf.setDefaultCloseOperation(MainForm.EXIT_ON_CLOSE);
       mf.pack();
       mf.setTitle("JavaChat");

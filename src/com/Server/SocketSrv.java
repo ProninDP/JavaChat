@@ -11,13 +11,13 @@ import com.Util.*;
  */
 
 
-public class DSSrv {
+public class SocketSrv {
   private static BufferedReader in; // поток чтения из сокета
   private static BufferedWriter out; // поток записи в сокет
   private static final int PORT = 9996;
 
 
-  public void DSServer() { //принимаем данные
+  public void SocketServer() { //принимаем данные
     String msg;
     try (ServerSocket server = new ServerSocket(PORT)){
       while (true) {
@@ -39,7 +39,7 @@ public class DSSrv {
     }
   }
   //TODO: Дописать метод отправки
-  public void DSClient(InetAddress ipaddr, int port) {
+  public void SocketClient(InetAddress ipaddr, int port) {
     try (Socket socket = new Socket(ipaddr, port)){
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
       out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -50,7 +50,7 @@ public class DSSrv {
     }
   }
 
-  public void DSCping(ReceivedNL receivedNL) { //"пингуем" юзеров по списку
+  public void SocketPing(ReceivedNL receivedNL) { //"пингуем" юзеров по списку
     try {
       Enumeration en = receivedNL.getHmap().keys();
       while (en.hasMoreElements()) {
@@ -62,7 +62,7 @@ public class DSSrv {
           out.flush();
           out.close();
         } catch (SocketException e){
-          System.out.println("Сокет клиента не отвечает, удаляем из списка!");
+          System.out.println("Сокет клиента не доступен, удаляем из списка!");
           receivedNL.delSet(addr); //получатель не доступен, удаляем из списка
         }
       }

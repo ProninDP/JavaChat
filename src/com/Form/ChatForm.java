@@ -4,10 +4,10 @@ import com.Util.Smile;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.URL;
 import java.util.ArrayList;
 /**
  * Класс формы оправки-чтения сообщений,
@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * @version 0.1
  */
 public class ChatForm extends JFrame{
+  private static final String ICON_DIR = "/com/res/smiledir/";
   private JPanel rootPanel;
   private JTabbedPane tabbedPane1;
   private JPanel tabP1;
@@ -67,19 +68,23 @@ public class ChatForm extends JFrame{
         }
       }
     });
+
     buttSmile.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        JFrame smilefram = new JFrame();
+        /*JFrame smilefram = new JFrame();
         smilefram.setUndecorated(true);
         smilefram.setVisible(true);
         smilefram.setSize(250, 300);
         JPanel contents = new JPanel();
-        contents.setBorder(new EmptyBorder(5, 5, 5, 5));
+        //contents.setBorder(new EmptyBorder(5, 5, 5, 5));
         JButton exit = new JButton("Exit");
-        JList<String> jList = new JList<>(smile.getSmileName());
+        //JList<String> jList = new JList<>(smile.getSmileName());
         exit.setSize(200, 200);
-        contents.add(new JScrollPane(jList));
+        JScrollPane jScrollPane = new JScrollPane();
+        for(String s : smile.getSmileName())
+          jScrollPane.add(new JButton(s));
+        contents.add(jScrollPane);
         contents.add(exit);
         smilefram.setContentPane(contents);
         exit.addActionListener(new ActionListener() {
@@ -87,7 +92,53 @@ public class ChatForm extends JFrame{
           public void actionPerformed(ActionEvent e) {
             smilefram.dispose();
           }
+        });*/
+
+        JLayeredPane lp = getLayeredPane();
+        JComponent source = (JComponent) e.getSource();
+        JPanel jPanel = new JPanel();
+        jPanel.setOpaque(false);
+        jPanel.setSize(200, 200);
+        jPanel.setVisible(true);
+        jPanel.setBorder(new LineBorder(Color.gray));
+        jPanel.setLocation(new Point(source.getX() + source.getWidth() / 2,
+                source.getY() + source.getHeight() / 2));
+
+        for(String s : smile.getSmileName()) {
+          jPanel.add(creatLabel(s, source), JLayeredPane.POPUP_LAYER);
+        }
+        jPanel.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            jPanel.setVisible(false);
+          }
         });
+        //lp.add(jPanel, JLayeredPane.POPUP_LAYER);
+        JScrollPane jScrollPane = new JScrollPane();
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        //jScrollPane.setBounds(jPanel.getX(), jPanel.getY(), jPanel.getWidth(), jPanel.getHeight());
+        jPanel.add(jScrollPane);
+        lp.add(jPanel, JLayeredPane.POPUP_LAYER);
+        //jScrollPane.getViewport().setPreferredSize(new Dimension(250, 250));
+      }
+      private JLabel creatLabel(String s, JComponent source) {
+        JLabel jLabel = new JLabel();
+        jLabel.setOpaque(false);
+        jLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel.setBackground(new Color(50, 210, 250, 200));
+        jLabel.setSize(24, 24);
+        jLabel.setBorder(new LineBorder(Color.gray));
+        jLabel.setVisible(true);
+        URL imageURL = ChatForm.class.getResource(ICON_DIR + s);
+        ImageIcon image = new ImageIcon(imageURL);
+        jLabel.setIcon(image);
+        jLabel.addMouseListener(new MouseAdapter() {
+          @Override
+          public void mouseClicked(MouseEvent e) {
+            jLabel.setVisible(false);
+          }
+        });
+        return jLabel;
       }
     });
   }

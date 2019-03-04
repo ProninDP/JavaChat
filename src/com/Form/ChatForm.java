@@ -114,10 +114,12 @@ public class ChatForm extends JFrame{
           }
         });
         //lp.add(jPanel, JLayeredPane.POPUP_LAYER);
-        JScrollPane jScrollPane = new JScrollPane();
+        JScrollPane jScrollPane = new JScrollPane(jPanel);
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //jScrollPane.setBounds(jPanel.getX(), jPanel.getY(), jPanel.getWidth(), jPanel.getHeight());
-        jPanel.add(jScrollPane);
+        jScrollPane.setPreferredSize(jPanel.getPreferredSize());
+        //jScrollPane.add(jPanel);
         lp.add(jPanel, JLayeredPane.POPUP_LAYER);
         //jScrollPane.getViewport().setPreferredSize(new Dimension(250, 250));
       }

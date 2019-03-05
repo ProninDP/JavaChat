@@ -6,12 +6,9 @@ import java.io.File;
  * @version 0.1
  */
 public class Smile {
-  private static final String PATH_SMILE = "/com/res/smiledir";
-  private String[] smileName;
-  public Smile() {
-    smileName = new File(Smile.class.getResource(PATH_SMILE)
-            .getFile()).list((dir, namelink) -> namelink.endsWith(".png"));
-  }
+  private static final String[] smileName = new File(Smile.class.getResource("/com/res/smiledir")
+          .getFile()).list((dir, namelink) -> namelink.endsWith(".png"));;
+
   public String[] getSmileName() {
     return smileName;
   }

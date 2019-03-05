@@ -10,19 +10,11 @@ import java.util.ArrayList;
  * @version 0.1
  */
 public class NameList {
-  private String name;
-  private String[] listf;
+  private static final String name = System.getProperty("user.name");
+  private static final String[] listf = new File("C:\\Users\\" + name + "\\Contacts")
+          .list((dir, namelink) -> namelink.endsWith(".contact"));;
 
-  public NameList() {
-    name = System.getProperty("user.name");
-    listf = new File("C:\\Users\\" + name + "\\Contacts")
-            .list(new FilenameFilter() {
-              @Override
-              public boolean accept(File dir, String namelink) {
-                return namelink.endsWith(".contact");
-              }
-            });
-  }
+
   public ArrayList<String> nl(String status) {
     ArrayList<String> list = new ArrayList<>();
     list.add(name);

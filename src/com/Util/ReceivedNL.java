@@ -10,16 +10,16 @@ import java.util.concurrent.ConcurrentHashMap;
  * @version 0.1
  */
 public class ReceivedNL {
-  private ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<InetAddress, ArrayList<String>> hmap = new ConcurrentHashMap<>();
 
   public ConcurrentHashMap<InetAddress, ArrayList<String>> getHmap() {
     return hmap;
   }
 
-  public synchronized void entrySet(InetAddress ipadr, ArrayList<String> name) {
+  public void entrySet(InetAddress ipadr, ArrayList<String> name) {
     hmap.put(ipadr, name);
   }
-  public synchronized void delSet(InetAddress ipadr) {
+  public void delSet(InetAddress ipadr) {
     hmap.remove(ipadr);
   }
 

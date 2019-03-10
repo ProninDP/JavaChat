@@ -3,7 +3,14 @@ package com.Server;
 import java.io.*;
 import java.net.*;
 import java.util.Enumeration;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+
 import com.Util.*;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 /**
  * Класс прием-отправки сообщений,
  * @author Пронин Дмитрий Павлович slidernode@yandex.ru
@@ -17,28 +24,33 @@ public class SocketSrv {
   private static final int PORT = 9996;
 
 
-  public void SocketServer() { //принимаем данные
+  public void SocketServer() throws IOException, InterruptedException { //принимаем соединения
     String msg;
-    try (ServerSocket server = new ServerSocket(PORT)){
-      while (true) {
-        Socket socket = server.accept();
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        //TODO: Добавить новое соединение в список сокетов
-
-        msg = in.readLine();
-
-        if (msg.equals("ping")) {
-          System.out.println("Don't worry, this is ping");
+    ServerSocket server = new ServerSocket(PORT);
+    ExecutorService executorService = Executors.newFixedThreadPool(1000);
+    Semaphore semaphore = new Semaphore(1000);
+    while (true) {
+      semaphore.acquire();
+      Socket socket = server.accept();
+      executorService.execute(() -> {
+        try (Socket accept = socket) {
+          server(accept);
+        } catch (Exception e) {
+          e.printStackTrace();
+        } finally {
+          semaphore.release();
         }
-        in.close();
-      }
-
-
-    } catch (IOException e){
-      e.printStackTrace();
+      });
     }
   }
-  //TODO: Дописать метод отправки
+  public static void server(final Socket accept) throws IOException{
+    InputStream is = accept.getInputStream();
+    OutputStream os = accept.getOutputStream();
+    ObjectInputStream ois = new ObjectInputStream(is);
+    ObjectOutputStream oos = new ObjectOutputStream(os);
+  }
+
+
   public void SocketClient(InetAddress ipaddr, int port) {
     try (Socket socket = new Socket(ipaddr, port)){
       in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

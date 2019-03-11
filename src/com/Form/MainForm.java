@@ -40,7 +40,7 @@ public class MainForm extends JFrame {
     setVisible(false);
   }
 
-  public MainForm(ReceivedNL receivedNL, Status status, Smile smile) {
+  public MainForm(ReceivedNL receivedNL, Status status) {
     URL imageURL = MainForm.class.getResource(ICON_STR);
     Image image = Toolkit.getDefaultToolkit().getImage(imageURL);
     setIconImage(image);
@@ -48,7 +48,7 @@ public class MainForm extends JFrame {
     //Отобразить список
     list1.setListData(receivedNL.getHmap().values().toArray());
     //Окно чата
-    ChatForm cf = new ChatForm(smile);
+    ChatForm cf = new ChatForm();
     cf.setDefaultCloseOperation(ChatForm.HIDE_ON_CLOSE);
     cf.pack();
     cf.setTitle("Chat");

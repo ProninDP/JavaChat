@@ -6,10 +6,18 @@ import java.io.File;
  * @version 0.1
  */
 public class Smile {
-  private static final String[] smileName = new File(Smile.class.getResource("/com/res/smiledir")
-          .getFile()).list((dir, namelink) -> namelink.endsWith(".png"));;
+  private static Smile _instance = null;
+  private static String[] smileName = null;
 
-  public String[] getSmileName() {
+  private Smile(){
+      smileName = new File(Smile.class.getResource("/com/res/smiledir")
+              .getFile()).list((dir, namelink) -> namelink.endsWith(".png"));
+  }
+  public static Smile getInstance(){
+    return _instance = _instance == null ? new Smile() : _instance;
+  }
+
+  public String[] getSmileName() throws NullPointerException{
     return smileName;
   }
 }

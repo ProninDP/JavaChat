@@ -1,6 +1,7 @@
 package com.Form;
 
 import com.Util.Smile;
+import com.Util.TestSmile;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,6 +10,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Класс формы оправки-чтения сообщений,
  * @author Пронин Дмитрий Павлович slidernode@yandex.ru
@@ -45,10 +48,12 @@ public class ChatForm extends JFrame{
   private JPanel jpanel;
   private JTextPane textPaneIn;
   private JTextPane textPaneOut;
-  private Smile smile;
+  //private Smile smile;
+  //private TestSmile smile;
 
-  public ChatForm(Smile smile){
-    this.smile = smile;
+
+  public ChatForm(){
+    //this.smile = smile;
     this.getContentPane().add(rootPanel);
     //tabbedPane1.addTab(name, new TabbPane());
   }
@@ -104,26 +109,28 @@ public class ChatForm extends JFrame{
         jPanel.setLocation(new Point(source.getX() + source.getWidth() / 2,
                 source.getY() + source.getHeight() / 2));
 
-        for(String s : smile.getSmileName()) {
-          jPanel.add(creatLabel(s, source), JLayeredPane.POPUP_LAYER);
+        for(String s : Smile.getInstance().getSmileName()) {
+          jPanel.add(creatLabel(s, jPanel), JLayeredPane.POPUP_LAYER);
         }
+
         jPanel.addMouseListener(new MouseAdapter() {
           @Override
           public void mouseClicked(MouseEvent e) {
             jPanel.setVisible(false);
           }
         });
+
         //lp.add(jPanel, JLayeredPane.POPUP_LAYER);
-        JScrollPane jScrollPane = new JScrollPane(jPanel);
+        JScrollPane jScrollPane = new JScrollPane();
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //jScrollPane.setBounds(jPanel.getX(), jPanel.getY(), jPanel.getWidth(), jPanel.getHeight());
         jScrollPane.setPreferredSize(jPanel.getPreferredSize());
-        //jScrollPane.add(jPanel);
+        jScrollPane.add(jPanel);
         lp.add(jPanel, JLayeredPane.POPUP_LAYER);
         //jScrollPane.getViewport().setPreferredSize(new Dimension(250, 250));
       }
-      private JLabel creatLabel(String s, JComponent source) {
+      private JLabel creatLabel(String s, JPanel jPanel) {
         JLabel jLabel = new JLabel();
         jLabel.setOpaque(false);
         jLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -131,6 +138,7 @@ public class ChatForm extends JFrame{
         jLabel.setSize(24, 24);
         jLabel.setBorder(new LineBorder(Color.gray));
         jLabel.setVisible(true);
+        //jLabel.setText(s);
         URL imageURL = ChatForm.class.getResource(ICON_DIR + s);
         ImageIcon image = new ImageIcon(imageURL);
         jLabel.setIcon(image);
@@ -138,6 +146,8 @@ public class ChatForm extends JFrame{
           @Override
           public void mouseClicked(MouseEvent e) {
             jLabel.setVisible(false);
+            jPanel.setVisible(false);
+            textPaneOut.insertIcon(jLabel.getIcon());
           }
         });
         return jLabel;
